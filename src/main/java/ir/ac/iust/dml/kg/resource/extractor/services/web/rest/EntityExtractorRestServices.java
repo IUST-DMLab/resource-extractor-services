@@ -29,7 +29,7 @@ public class EntityExtractorRestServices {
             .getCodeSource().getLocation().toURI().getPath();
         final Path cacheAddress = Paths.get(jarFilePath).getParent().resolve("cache");
         try (IResourceReader reader = new ResourceCache(cacheAddress.toString(), true)) {
-            extractor.setup(reader, 1000);
+          extractor.setup(reader, 10000);
         }
     }
 
