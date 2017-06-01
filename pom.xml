@@ -6,7 +6,7 @@
 
     <groupId>ir.ac.iust.dml.kg</groupId>
     <artifactId>resource-extractor-services</artifactId>
-    <version>1.0.0</version>
+    <version>1.5.0</version>
     <name>entity extraction services project</name>
 
 
@@ -24,8 +24,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
                 <configuration>
                     <archive>
+                        <manifestEntries>
+                            <Class-Path>
+                                lib/com.openlinksw.virtuoso-1.0.jar
+                                lib/com.openlinksw.virtuoso-4.2.jar
+                            </Class-Path>
+                        </manifestEntries>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>ir.ac.iust.dml.kg.resource.extractor.services.Application</mainClass>
@@ -37,7 +44,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -54,8 +61,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
@@ -63,7 +68,7 @@
         <dependency>
             <groupId>ir.ac.iust.dml.kg</groupId>
             <artifactId>resource-extractor</artifactId>
-            <version>1.0.0</version>
+            <version>1.2.7</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
@@ -84,6 +89,12 @@
             </exclusions>
         </dependency>
         <!-- Spring and Transactions -->
+        <dependency>
+            <groupId>ir.ac.iust.dml.kg</groupId>
+            <artifactId>utils</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -130,6 +141,36 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.8.7</version>
+        </dependency>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.47</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.rdf4j</groupId>
+            <artifactId>rdf4j-runtime</artifactId>
+            <version>2.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>virt_rdf4j</groupId>
+            <artifactId>com.openlinksw.virtuoso</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/lib/virt_rdf4j.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>virtjdbc</groupId>
+            <artifactId>com.openlinksw.virtuoso</artifactId>
+            <version>4.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/lib/virtjdbc4_2.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
