@@ -37,7 +37,7 @@ public class Application {
           cfg.getString("virtuoso.port", "1111"),
           cfg.getString("virtuoso.user", "dba"),
           cfg.getString("virtuoso.password", "fkgVIRTUOSO2017"),
-          cfg.getString("virtuoso.graph", "http://fkg.iust.ac.ir/"))) {
+          cfg.getString("virtuoso.graph", "http://fkg.iust.ac.ir/new"))) {
         cache.cache(reader, 10000);
       }
     }
