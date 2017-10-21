@@ -36,7 +36,8 @@ public class EntityExtractorRestServices {
     @RequestMapping(value = "/extract", method = RequestMethod.GET)
     @ResponseBody
     public List<MatchedResource> search(@RequestParam(required = false) String text,
-                                        @RequestParam(defaultValue = "false") boolean removeSubset) throws Exception {
-      return extractor.search(text, removeSubset);
+                                        @RequestParam(defaultValue = "false") boolean removeSubset,
+                                        @RequestParam(defaultValue = "true") boolean removeCategory) throws Exception {
+      return extractor.search(text, removeSubset, removeCategory);
     }
 }
