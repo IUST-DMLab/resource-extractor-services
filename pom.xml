@@ -20,6 +20,7 @@
 
 
     <build>
+	<finalName>resource-extractor-services</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
