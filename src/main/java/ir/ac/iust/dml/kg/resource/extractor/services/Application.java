@@ -43,7 +43,7 @@ public class Application {
       }
       if (args.length > 0 && args[0].equals("ttl")) {
         try (IResourceReader reader = new ResourceReaderFromTTLs(
-            cfg.getString("store.ttl.root", "~/ttl_store"),
+            cfg.getPath("store.ttl.root", "~/ttl_store").toString(),
             cfg.getString("virtuoso.graph", URIs.INSTANCE.getDefaultContext()))) {
           cache.cache(reader, 10000);
         }
