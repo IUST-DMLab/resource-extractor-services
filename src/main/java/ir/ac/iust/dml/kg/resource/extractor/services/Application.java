@@ -1,9 +1,11 @@
 package ir.ac.iust.dml.kg.resource.extractor.services;
 
 import ir.ac.iust.dml.kg.raw.utils.ConfigReader;
+import ir.ac.iust.dml.kg.raw.utils.URIs;
 import ir.ac.iust.dml.kg.resource.extractor.IResourceReader;
 import ir.ac.iust.dml.kg.resource.extractor.ResourceCache;
 import ir.ac.iust.dml.kg.resource.extractor.readers.ResourceReaderFromKGStoreV2Service;
+import ir.ac.iust.dml.kg.resource.extractor.readers.ResourceReaderFromTTLs;
 import ir.ac.iust.dml.kg.resource.extractor.readers.ResourceReaderFromVirtuoso;
 import ir.ac.iust.dml.kg.resource.extractor.services.web.Jackson2ObjectMapperPrettier;
 import ir.ac.iust.dml.kg.resource.extractor.services.web.filter.FilterRegistrationConfiguration;
@@ -38,13 +40,20 @@ public class Application {
             ConfigReader.INSTANCE.getString("knowledge.store.base.url", "http://localhost:8091/"))) {
           cache.cache(reader, 10000);
         }
+      }
+      if (args.length > 0 && args[0].equals("ttl")) {
+        try (IResourceReader reader = new ResourceReaderFromTTLs(
+            cfg.getString("store.ttl.root", "~/ttl_store"),
+            cfg.getString("virtuoso.graph", URIs.INSTANCE.getDefaultContext()))) {
+          cache.cache(reader, 10000);
+        }
       } else {
         try (IResourceReader reader = new ResourceReaderFromVirtuoso(
             cfg.getString("virtuoso.host", "194.225.227.161"),
             cfg.getString("virtuoso.port", "1111"),
             cfg.getString("virtuoso.user", "dba"),
             cfg.getString("virtuoso.password", "fkgVIRTUOSO2017"),
-            cfg.getString("virtuoso.graph", "http://fkg.iust.ac.ir/new"))) {
+            cfg.getString("virtuoso.graph", URIs.INSTANCE.getDefaultContext()))) {
           cache.cache(reader, 10000);
         }
       }
