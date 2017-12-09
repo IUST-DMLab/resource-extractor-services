@@ -16,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @SpringBootApplication
 //@ImportResource(value = {})
@@ -27,9 +26,7 @@ import java.nio.file.Paths;
 public class Application {
 
   public static void main(String[] args) throws Exception {
-    final String jarFilePath = Application.class.getProtectionDomain()
-        .getCodeSource().getLocation().toURI().getPath();
-    final Path cacheAddress = Paths.get(jarFilePath).getParent().resolve("cache");
+    Path cacheAddress = ConfigReader.INSTANCE.getPath("searcher.cache.dir", "cache");
     if (!Files.exists(cacheAddress)) {
       Files.createDirectories(cacheAddress);
       final ResourceCache cache = new ResourceCache(cacheAddress.toAbsolutePath().toString(),
