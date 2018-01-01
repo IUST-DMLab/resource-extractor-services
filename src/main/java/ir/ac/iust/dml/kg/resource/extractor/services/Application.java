@@ -37,8 +37,7 @@ public class Application {
             ConfigReader.INSTANCE.getString("knowledge.store.base.url", "http://localhost:8091/"))) {
           cache.cache(reader, 10000);
         }
-      }
-      if (args.length > 0 && args[0].equals("ttl")) {
+      } else if (args.length > 0 && args[0].equals("ttl")) {
         try (IResourceReader reader = new ResourceReaderFromTTLs(
             cfg.getPath("store.ttl.root", "~/ttl_store").toString(),
             cfg.getString("virtuoso.graph", URIs.INSTANCE.getDefaultContext()))) {
